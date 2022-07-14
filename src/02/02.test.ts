@@ -1,4 +1,5 @@
 import {CityType, GovernmentBuildingType} from './02_02';
+import {createMessageForPeople, getStreetsTitlesOfGovernmentBuildings, getStreetsTitlesOfHouses} from '../05/05_02';
 
 let city: CityType;
 
@@ -82,7 +83,7 @@ test('test city should contains hospital and fire station', () => {
     expect(city.governmentBuildings[1].address.street.title).toBe('South Str');
 });
 
-//from lecture about filter()
+//from lecture 4 about filter()
 // 01. Дополните тип HouseType (добавьте порядковый id от 1 и по возрастанию)
 // 02. Создайте в том же файле ещё одну функцию, чтобы тесты прошли
 test('House on Happy street should be destroyed', () => {
@@ -105,3 +106,33 @@ test('buildings with correct staff count', () => {
     expect(buildings.length).toBe(1);
     expect(buildings[0].type).toBe('FIRE-STATION');
 });
+
+//from lecture 5 about map()
+
+// 01. создайте в том же файле ещё одну функцию, чтобы тесты прошли
+test('list of streets titles of government buildings', ()=> {
+
+    let streetsNames = getStreetsTitlesOfGovernmentBuildings(city.governmentBuildings);
+
+    expect(streetsNames.length).toBe(2);
+    expect(streetsNames[0]).toBe("Central Str");
+    expect(streetsNames[1]).toBe("South Str");
+})
+
+//02. создайте в том же файле ещё одну функцию, чтобы тесты прошли
+test('list of streets titles', ()=> {
+    let streetsNames = getStreetsTitlesOfHouses(city.houses);
+
+    expect(streetsNames.length).toBe(3);
+    expect(streetsNames[0]).toBe("White street");
+    expect(streetsNames[1]).toBe("Happy street");
+    expect(streetsNames[2]).toBe("Happy street");
+})
+//03. создайте в том же файле ещё одну функцию, чтобы тесты прошли
+test('create greeting messages for people from streets', ()=>{
+    let streetGreet=createMessageForPeople(city.houses)
+    expect(streetGreet.length).toBe(3)
+    expect(streetGreet[0]).toBe('Hello people from White street')
+})
+
+
